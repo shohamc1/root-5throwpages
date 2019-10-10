@@ -3,6 +3,5 @@
 WIP version.
 
 Todo:
-- Image upload/display
 - Front end magic
 - Tests?
