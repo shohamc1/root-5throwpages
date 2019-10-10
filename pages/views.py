@@ -2,25 +2,25 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import pagecontent
-from .forms import FifthForm
 
 # Create your views here.
 
 def page (request):
-    data = pagecontent.objects.all()
-    return render (request, 'main.html', {'data': data})
+    if request.method == 'POST':
+        request.session['inputid'] = int(request.POST.get('inputid'))
+        return HttpResponseRedirect(reverse('pages:page'))
+    else:
+        data = pagecontent.objects.all()
+        inputid = request.session.get('inputid')
+        print (inputid)
+        return render (request, 'main.html', {'data': data, 'testid': inputid})
 
 def upload (request):
     if request.method == 'POST':
         #add new data
-        #newitem = pagecontent(id = request.POST.get('id'), name = request.POST.get('name'), shortdesc = request.POST.get('shortdesc'), desc1 = request.POST.get('desc1'), desc2 = request.POST.get('desc2'), photo = request.POST.get('photo'))
-        #newitem.save()
-        form = FifthForm(request.POST, request.FILES)
-        if form.is_valid():
-            data.save()
-            return HttpResponseRedirect (reverse('pages:upload'))
-        else:
-            return render(request, 'form.html', {form: 'form'})
+        newitem = pagecontent(id = request.POST.get('id'), name = request.POST.get('name'), shortdesc = request.POST.get('shortdesc'), desc1 = request.POST.get('desc1'), desc2 = request.POST.get('desc2'), photo = request.FILES['photo'])
+        newitem.save()
+        return HttpResponseRedirect (reverse('pages:upload'))
     
     else:
         #show the form

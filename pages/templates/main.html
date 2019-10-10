@@ -2,9 +2,17 @@
 
 <html>
     <body>
-        <img src="{{ data.0.photo.url }}"> <br>
-        {{ data.0.shortdesc }}<br>
-        {{ data.0.desc1 }}<br>
-        {{ data.0.desc2 }}<br>
+        <form action="#" method="POST">{% csrf_token %}
+            ID of page: <input name="inputid" type="text">
+            <button type="submit">Submit</button>
+        </form>
+        {% for entry in data %}
+        {% if entry.id == testid %}
+            <img src="{{ entry.photo.url }}" width=30% height=30%> <br>
+            {{ entry.shortdesc }}<br>
+            {{ entry.desc1 }}<br>
+            {{ entry.desc2 }}<br>
+        {% endif %}
+        {% endfor %}
     </body>
 </html>
