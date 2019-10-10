@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+    <body>
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <!--ID: <input name="id" type="text"><br>
+            Name: <input name="name" type="text"><br>
+            Short Description: <input name="shortdesc" type="text"><br>
+            Description1: <input name="desc1" type="text"><br>
+            Description2: <input name="desc2" type="text"><br>
+            Photo: <input name="photo" type="file"><br>
+            <button type="submit">Submit</button>-->
+            {{ form }}
+        </form>
+    </body>
+</html>

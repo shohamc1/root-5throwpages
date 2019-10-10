@@ -5,4 +5,5 @@ app_name = "pages"
 
 urlpatterns = [
     path('', views.page, name='page'),
+    path('submit', views.upload, name='upload'),
 ]
